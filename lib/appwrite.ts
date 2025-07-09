@@ -55,3 +55,21 @@ export const signIn = async ({ email, password }: SignInParams) => {
     throw new Error(e as string);
   }
 };
+
+export const getCurrentUser = async () => {
+  try {
+    const currentAccount = account.get();
+    if (!currentAccount) throw new Error();
+
+    const currentUser = await databases.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.userCollectionId,
+    );
+
+    if (!currentUser) throw Error;
+
+    return currentUser.documents[0];
+  } catch (e) {
+    throw new Error(e as string);
+  }
+};
