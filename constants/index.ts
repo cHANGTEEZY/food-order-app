@@ -18,6 +18,7 @@ import star from "@/assets/icons/star.png";
 import trash from "@/assets/icons/trash.png";
 import user from "@/assets/icons/user.png";
 import arrowBack from "../assets/icons/arrow-back.png";
+import emptyCart from "@/assets/icons/abandoned-cart.png";
 
 import avatar from "@/assets/images/avatar.png";
 import avocado from "@/assets/images/avocado.png";
@@ -199,4 +200,5 @@ export const images = {
   star,
   trash,
   user,
+  emptyCart,
 };

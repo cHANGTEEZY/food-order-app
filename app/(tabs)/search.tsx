@@ -10,7 +10,7 @@ import cn from "clsx";
 import { FlatList, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import MenuCard from "@/components/MenuCard";
-import { Category, MenuItem } from "@/type";
+import { MenuItem } from "@/type";
 import SearchBar from "@/components/SearchBar";
 import Filter from "@/components/Filter";
 
