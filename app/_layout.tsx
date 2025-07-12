@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import "./globals.css";
 import * as Sentry from "@sentry/react-native";
 import useAuthStore from "@/store/auth.store";
+import { StatusBar } from "react-native";
 
 Sentry.init({
   dsn: "https://c1a651970494f55474f20518306d276a@o4509636263673856.ingest.de.sentry.io/4509636266950736",
@@ -54,6 +55,7 @@ export default Sentry.wrap(function RootLayout() {
 
   return (
     <>
+      <StatusBar />
       <Stack screenOptions={{ headerShown: false }} />
     </>
   );

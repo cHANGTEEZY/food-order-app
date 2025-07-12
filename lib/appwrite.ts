@@ -70,6 +70,14 @@ export const signIn = async ({ email, password }: SignInParams) => {
   }
 };
 
+export const logout = async () => {
+  try {
+    await account.deleteSession("current");
+  } catch (error) {
+    throw new Error(error as string);
+  }
+};
+
 export const getCurrentUser = async () => {
   try {
     const currentAccount = account.get();

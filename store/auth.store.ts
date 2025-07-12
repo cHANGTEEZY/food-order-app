@@ -1,5 +1,6 @@
-import { getCurrentUser } from "@/lib/appwrite";
+import { getCurrentUser, logout } from "@/lib/appwrite";
 import { User } from "@/type";
+import { router } from "expo-router";
 import { create } from "zustand";
 
 type AuthState = {
@@ -10,6 +11,7 @@ type AuthState = {
   setUser: (user: User | null) => void;
   setLoading: (loading: boolean) => void;
   fetchAuthenticatedUser: () => Promise<void>;
+  logoutUser: () => Promise<void>;
 };
 
 const useAuthStore = create<AuthState>((set) => ({
@@ -28,6 +30,17 @@ const useAuthStore = create<AuthState>((set) => ({
     } catch (e) {
       console.log("Fetch authenticated user error", e);
       set({ isAuthenticated: false, user: null });
+    } finally {
+      set({ isLoading: false });
+    }
+  },
+  logoutUser: async () => {
+    set({ isLoading: true });
+    try {
+      await logout();
+      router.replace("/(auth)/sign-in");
+    } catch (e) {
+      console.log("User logged out error", e);
     } finally {
       set({ isLoading: false });
     }
