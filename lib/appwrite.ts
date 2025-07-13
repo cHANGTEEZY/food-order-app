@@ -80,19 +80,23 @@ export const logout = async () => {
 
 export const getCurrentUser = async () => {
   try {
-    const currentAccount = account.get();
-    if (!currentAccount) throw new Error();
+    const currentAccount = await account.get();
+    if (!currentAccount) throw new Error("No current account found");
 
     const currentUser = await databases.listDocuments(
       appwriteConfig.databaseId,
       appwriteConfig.userCollectionId,
+      [Query.equal("accountId", currentAccount.$id)],
     );
 
-    if (!currentUser) throw Error;
+    if (!currentUser || currentUser.documents.length === 0) {
+      throw new Error("User not found in the database");
+    }
 
     return currentUser.documents[0];
-  } catch (e) {
-    throw new Error(e as string);
+  } catch (e: any) {
+    console.log("Error getting current user:", e);
+    throw new Error(e.message || "An error occurred while fetching the user.");
   }
 };
 
